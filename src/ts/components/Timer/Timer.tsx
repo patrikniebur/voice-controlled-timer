@@ -1,7 +1,7 @@
 import React from "react";
 import { flushSync } from "react-dom";
 
-import style from "./styles.module.css";
+import * as style from "./styles.module.css";
 
 export function Timer({ run = true }: { run?: boolean }) {
   const [hours, minutes, seconds, ms] = useTimer(run);
@@ -10,7 +10,7 @@ export function Timer({ run = true }: { run?: boolean }) {
     <span className={style.timer}>
       <span className={style.hours}>{hours}</span>
       <span className={style.minutes}>{minutes}</span>
-      <span className={style.seconds}>{seconds}</span>
+      <span>{seconds}</span>
       <span className={style.milliseconds}>{ms}</span>
     </span>
   );

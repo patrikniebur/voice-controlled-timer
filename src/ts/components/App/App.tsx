@@ -4,7 +4,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import { Timer } from "../Timer/Timer";
-import style from "./styles.module.css";
+import * as style from "./styles.module.css";
 
 export function App() {
   const [resetKey, setResetKey] = React.useState(0);

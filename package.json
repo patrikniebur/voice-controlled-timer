@@ -28,5 +28,8 @@
     "drafts": {
       "nesting": true
     }
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
 }
