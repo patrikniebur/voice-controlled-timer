@@ -1,0 +1,17 @@
+.timer {
+    font-family: monospace;
+    font-size: 6em;
+    margin: 2rem;
+}
+
+.hours::after,
+.minutes::after {
+    content: ":";
+}
+
+.seconds {}
+
+.milliseconds {
+    font-size: 0.5em;
+    vertical-align: top;
+}

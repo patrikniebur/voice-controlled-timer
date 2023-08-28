@@ -1,0 +1,32 @@
+{
+  "name": "voice_controlled_timer",
+  "version": "1.0.0",
+  "description": "Voice controlled timer using browser speech API",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "author": "Patrik Niebur <patrik.niebur@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/dom-speech-recognition": "^0.0.1",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-speech-recognition": "^3.9.2",
+    "parcel": "^2.9.3",
+    "prettier": "^3.0.2",
+    "process": "^0.11.10",
+    "typescript": "^5.2.2",
+    "typescript-plugin-css-modules": "^5.0.1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-speech-recognition": "^3.10.0"
+  },
+  "@parcel/transformer-css": {
+    "drafts": {
+      "nesting": true
+    }
+  }
+}
