@@ -9,6 +9,7 @@
   "author": "Patrik Niebur <patrik.niebur@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.22.11",
     "@types/dom-speech-recognition": "^0.0.1",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
@@ -30,6 +31,6 @@
     }
   },
   "browserslist": [
-    "last 1 Chrome versions"
+    "defaults"
   ]
 }
