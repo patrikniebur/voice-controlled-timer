@@ -1,5 +1,4 @@
-// @ts-ignore
-require('regenerator-runtime/runtime');
+import 'regenerator-runtime/runtime'
 
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
