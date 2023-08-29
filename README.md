@@ -1,4 +1,6 @@
 ## Voice controlled timer  
+[Live demo](https://patrikniebur.github.io/voice-controlled-timer/)
+
 Requires [`SpeechRecognition` API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) which currently appears to work only in latest Chrome `v116`.  
 
 Recognizes 4 commands:  
