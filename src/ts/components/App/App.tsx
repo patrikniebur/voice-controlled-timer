@@ -25,16 +25,26 @@ export function App() {
 
 function useVoiceCommands() {
   const [lastCommand, setLastCommand] = React.useState("");
-  useSpeechRecognition({
+  const { transcript, resetTranscript } = useSpeechRecognition({
     commands: [
       {
-        command: ["start", "stop", "reset", "pause", "pose" /* pose - catches misunderstood pause */],
-        callback: setLastCommand,
+        command: [
+          "start",
+          "stop",
+          "reset",
+          "pause",
+          "pose" /* pose - catches misunderstood pause */,
+        ],
+        callback: (lastCommand) => { setLastCommand(lastCommand); resetTranscript(); },
         matchInterim: true,
         isFuzzyMatch: true,
       },
     ],
   });
+
+  if (location.hash.includes("debug")) {
+    console.log({ transcript, lastCommand });
+  }
 
   React.useEffect(() => {
     // Timeout fixes error during development when listenning attempted to start
