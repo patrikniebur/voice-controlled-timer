@@ -8,3 +8,15 @@ body {
     background-color: #1f1711;
     color: #eeeeee;
 }
+
+.debug {
+    display: block;
+    padding: 2em;
+    background: #00800057;
+    width: 400px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    word-wrap: break-word;
+}

@@ -4,11 +4,12 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import { Timer } from "../Timer/Timer";
+import { Debug } from "../Debug";
 import * as style from "./styles.module.css";
 
 export function App() {
   const [resetKey, setResetKey] = React.useState(0);
-  const lastCommand = useVoiceCommands();
+  const [lastCommand, transcript] = useVoiceCommands();
 
   React.useEffect(() => {
     if (["reset", "stop"].includes(lastCommand)) {
@@ -19,6 +20,10 @@ export function App() {
   return (
     <div className={style.container}>
       <Timer key={resetKey} run={lastCommand === "start"} />
+      <Debug>
+        <p>Last command: {lastCommand}</p>
+        <p>Transcript: {transcript}</p>
+      </Debug>
     </div>
   );
 }
@@ -35,16 +40,15 @@ function useVoiceCommands() {
           "pause",
           "pose" /* pose - catches misunderstood pause */,
         ],
-        callback: (lastCommand) => { setLastCommand(lastCommand); resetTranscript(); },
+        callback: (lastCommand) => {
+          setLastCommand(lastCommand);
+          resetTranscript();
+        },
         matchInterim: true,
         isFuzzyMatch: true,
       },
     ],
   });
-
-  if (location.hash.includes("debug")) {
-    console.log({ transcript, lastCommand });
-  }
 
   React.useEffect(() => {
     // Timeout fixes error during development when listenning attempted to start
@@ -59,5 +63,5 @@ function useVoiceCommands() {
     };
   }, []);
 
-  return lastCommand;
+  return [lastCommand, transcript] as const;
 }

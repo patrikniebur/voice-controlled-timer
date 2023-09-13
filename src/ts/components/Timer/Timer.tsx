@@ -21,7 +21,6 @@ function useTimer(run: boolean) {
   const started = React.useRef(Date.now());
   const offset = React.useRef(0);
 
-
   const hours = Math.floor(et / (60 * 60 * 1000));
   const minutes = Math.floor((et / (60 * 1000)) % 60);
   const seconds = Math.floor((et / 1000) % 60);
@@ -60,8 +59,4 @@ function useTimer(run: boolean) {
 function leadingZeros(number: number, decimals = 2) {
   const offset = decimals - number.toString().length;
   return "0".repeat(offset) + number;
-}
-
-function formatTimeSeconds(t: number) {
-  return (t / 1000).toFixed(2);
 }
