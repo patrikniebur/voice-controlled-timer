@@ -9,7 +9,7 @@ import * as style from "./styles.module.css";
 
 export function App() {
   const [resetKey, setResetKey] = React.useState(0);
-  const [lastCommand, transcript] = useVoiceCommands();
+  const [lastCommand, transcript, error] = useVoiceCommands();
 
   React.useEffect(() => {
     if (["reset", "stop"].includes(lastCommand)) {
@@ -23,6 +23,7 @@ export function App() {
       <Debug>
         <p>Last command: {lastCommand}</p>
         <p>Transcript: {transcript}</p>
+        {error && <p>Error: [{error.error}] {error.message}</p>}
       </Debug>
     </div>
   );
@@ -30,6 +31,7 @@ export function App() {
 
 function useVoiceCommands() {
   const [lastCommand, setLastCommand] = React.useState("");
+  const [error, setError] = React.useState<SpeechRecognitionErrorEvent>();
   const { transcript, resetTranscript } = useSpeechRecognition({
     commands: [
       {
@@ -51,6 +53,20 @@ function useVoiceCommands() {
   });
 
   React.useEffect(() => {
+    const listener = (e: any) => {
+      console.log({error: e})
+      setError(e);
+    };
+    SpeechRecognition.getRecognition()?.addEventListener("error", listener);
+
+    return () =>
+      SpeechRecognition.getRecognition()?.removeEventListener(
+        "error",
+        listener,
+      );
+  }, []);
+
+  React.useEffect(() => {
     // Timeout fixes error during development when listenning attempted to start
     // before it has been aborted in a cleanup
     setTimeout(
@@ -63,5 +79,5 @@ function useVoiceCommands() {
     };
   }, []);
 
-  return [lastCommand, transcript] as const;
+  return [lastCommand, transcript, error] as const;
 }
