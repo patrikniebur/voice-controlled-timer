@@ -9,7 +9,7 @@ import * as style from "./styles.module.css";
 
 export function App() {
   const [resetKey, setResetKey] = React.useState(0);
-  const [lastCommand, transcript, error] = useVoiceCommands();
+  const [lastCommand, error] = useVoiceCommands();
 
   React.useEffect(() => {
     if (["reset", "stop"].includes(lastCommand)) {
@@ -22,7 +22,6 @@ export function App() {
       <Timer key={resetKey} run={lastCommand === "start"} />
       <Debug>
         <p>Last command: {lastCommand}</p>
-        <p>Transcript: {transcript}</p>
         {error && <p>Error: [{error.error}] {error.message}</p>}
       </Debug>
     </div>
@@ -33,6 +32,7 @@ function useVoiceCommands() {
   const [lastCommand, setLastCommand] = React.useState("");
   const [error, setError] = React.useState<SpeechRecognitionErrorEvent>();
   const { transcript, resetTranscript } = useSpeechRecognition({
+    transcribing: false,
     commands: [
       {
         command: [
@@ -79,5 +79,5 @@ function useVoiceCommands() {
     };
   }, []);
 
-  return [lastCommand, transcript, error] as const;
+  return [lastCommand, error] as const;
 }
