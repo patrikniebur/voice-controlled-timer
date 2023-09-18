@@ -31,7 +31,7 @@ export function App() {
 function useVoiceCommands() {
   const [lastCommand, setLastCommand] = React.useState("");
   const [error, setError] = React.useState<SpeechRecognitionErrorEvent>();
-  const { transcript, resetTranscript } = useSpeechRecognition({
+  useSpeechRecognition({
     transcribing: false,
     commands: [
       {
@@ -42,12 +42,11 @@ function useVoiceCommands() {
           "pause",
           "pose" /* pose - catches misunderstood pause */,
         ],
-        callback: (lastCommand) => {
-          setLastCommand(lastCommand);
-          resetTranscript();
-        },
+        callback: setLastCommand,
         matchInterim: true,
         isFuzzyMatch: true,
+        fuzzyMatchingThreshold: 0.4,
+        bestMatchOnly: true,
       },
     ],
   });
